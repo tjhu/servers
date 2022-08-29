@@ -1,6 +1,11 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nixpkgs, ... }:
 
 {
+  deployment = {
+    buildOnTarget = true;
+    targetHost = "neurolink.bee-liberty.ts.net";
+  };
+
   imports = ["${fetchTarball "https://github.com/NixOS/nixos-hardware/archive/936e4649098d6a5e0762058cb7687be1b2d90550.tar.gz" }/raspberry-pi/4"];
 
   nixpkgs.system = "aarch64-linux";
