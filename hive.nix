@@ -11,6 +11,7 @@
       tmux
       vim 
       wget
+      python310
     ];
   };
 

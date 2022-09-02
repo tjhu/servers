@@ -4,6 +4,7 @@
   deployment = {
     buildOnTarget = true;
     targetHost = "neurolink.bee-liberty.ts.net";
+    targetUser = "colmena";
   };
 
   imports = ["${fetchTarball "https://github.com/NixOS/nixos-hardware/archive/936e4649098d6a5e0762058cb7687be1b2d90550.tar.gz" }/raspberry-pi/4"];
@@ -27,9 +28,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-      vim
-      htop
-      tmux
       wavemon
   ];
 
@@ -76,6 +74,14 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
     };
+    users."colmena" = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+    };
   };
+
+  security.sudo.extraRules = [{ users = [ "colmena" ];
+    commands = [ { command = "ALL"; options = [ "SETENV" "NOPASSWD" ]; } ]; 
+  }];
 }
 
